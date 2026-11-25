@@ -1,0 +1,115 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "FabricExtractionResult",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["intent", "preferences", "constraints", "unmapped_terms"],
+  "properties": {
+    "intent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["advice_type", "fabric_types", "garment_types", "occasions"],
+      "properties": {
+        "advice_type": {
+          "type": "string",
+          "enum": ["find_fabric", "compare_fabrics", "ask_fabric_details", "other", "unclear"]
+        },
+        "fabric_types": { "$ref": "#/$defs/keyword_list" },
+        "garment_types": { "$ref": "#/$defs/keyword_list" },
+        "occasions": { "$ref": "#/$defs/keyword_list" }
+      }
+    },
+    "preferences": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["fabric_types", "characteristics", "price_level", "target_price"],
+      "properties": {
+        "fabric_types": { "$ref": "#/$defs/keyword_list" },
+        "characteristics": { "$ref": "#/$defs/keyword_list" },
+        "price_level": { "enum": ["economy", "mid_range", "premium", null] },
+        "target_price": {
+          "anyOf": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["amount", "currency", "basis"],
+              "properties": {
+                "amount": { "$ref": "#/$defs/amount" },
+                "currency": { "$ref": "#/$defs/currency" },
+                "basis": { "$ref": "#/$defs/price_basis" }
+              }
+            },
+            { "type": "null" }
+          ]
+        }
+      }
+    },
+    "constraints": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "seasons",
+        "required_fabric_types",
+        "excluded_fabric_types",
+        "required_characteristics",
+        "excluded_characteristics",
+        "budget"
+      ],
+      "properties": {
+        "seasons": { "$ref": "#/$defs/keyword_list" },
+        "required_fabric_types": { "$ref": "#/$defs/keyword_list" },
+        "excluded_fabric_types": { "$ref": "#/$defs/keyword_list" },
+        "required_characteristics": { "$ref": "#/$defs/keyword_list" },
+        "excluded_characteristics": { "$ref": "#/$defs/keyword_list" },
+        "budget": {
+          "anyOf": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["currency", "basis", "lower", "upper"],
+              "properties": {
+                "currency": { "$ref": "#/$defs/currency" },
+                "basis": { "$ref": "#/$defs/price_basis" },
+                "lower": { "$ref": "#/$defs/nullable_bound" },
+                "upper": { "$ref": "#/$defs/nullable_bound" }
+              }
+            },
+            { "type": "null" }
+          ]
+        }
+      }
+    },
+    "unmapped_terms": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1, "pattern": "\\S" }
+    }
+  },
+  "$defs": {
+    "keyword_list": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "type": "string", "pattern": "^[a-z][a-z0-9_]*$" }
+    },
+    "amount": { "type": "number", "minimum": 0 },
+    "currency": { "type": "string", "pattern": "^[A-Z]{3}$" },
+    "price_basis": {
+      "type": "string",
+      "enum": ["per_meter", "per_item", "total", "unspecified"]
+    },
+    "nullable_bound": {
+      "anyOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["amount", "inclusive"],
+          "properties": {
+            "amount": { "$ref": "#/$defs/amount" },
+            "inclusive": { "type": "boolean" }
+          }
+        },
+        { "type": "null" }
+      ]
+    }
+  }
+}

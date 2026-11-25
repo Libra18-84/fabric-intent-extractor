@@ -1,0 +1,60 @@
+{
+  "fabric_types": {
+    "cotton": ["cotton", "vải bông"],
+    "linen": ["linen", "vải lanh", "đũi lanh"],
+    "silk": ["lụa", "tơ tằm", "silk"],
+    "wool": ["len", "wool"],
+    "denim": ["denim", "vải bò", "vải jean", "vải jeans"],
+    "polyester": ["polyester", "vải poly"],
+    "viscose": ["viscose", "rayon"],
+    "nylon": ["nylon", "ni lông", "nilon"],
+    "spandex": ["spandex", "elastane", "lycra"],
+    "chiffon": ["chiffon", "vải voan"],
+    "satin": ["satin", "sa tanh"],
+    "velvet": ["nhung", "velvet"]
+  },
+  "characteristics": {
+    "breathable": ["thoáng", "thoáng mát", "thoáng khí", "mặc mát", "mát mẻ", "đỡ bí", "mát"],
+    "absorbent": ["thấm hút", "hút ẩm", "thấm mồ hôi"],
+    "soft": ["mềm", "mềm mại", "êm da"],
+    "lightweight": ["nhẹ", "mỏng nhẹ"],
+    "stretchy": ["co giãn", "co dãn", "đàn hồi"],
+    "wrinkle_resistant": ["ít nhăn", "chống nhăn", "không nhăn", "khó nhăn"],
+    "warm": ["ấm", "giữ ấm", "ấm áp"],
+    "water_resistant": ["chống nước", "kháng nước"],
+    "quick_drying": ["mau khô", "nhanh khô"],
+    "durable": ["bền", "chịu mài mòn"],
+    "transparent": ["xuyên thấu", "trong suốt", "nhìn xuyên qua"],
+    "itchy": ["ngứa", "gây ngứa", "cọ ngứa"],
+    "thick": ["dày", "dày dặn"]
+  },
+  "garment_types": {
+    "top": ["áo"],
+    "shirt": ["áo sơ mi", "sơ mi", "áo kiểu"],
+    "t_shirt": ["áo thun", "áo phông", "t-shirt"],
+    "pants": ["quần"],
+    "trousers": ["quần âu", "quần tây", "quần dài"],
+    "skirt": ["chân váy", "váy rời"],
+    "dress": ["đầm", "váy liền", "váy"],
+    "jacket": ["áo khoác", "áo gió", "áo jacket"],
+    "blazer": ["blazer", "áo vest"],
+    "ao_dai": ["áo dài"],
+    "shorts": ["quần đùi", "quần short", "quần soóc"],
+    "sportswear": ["đồ thể thao", "quần áo tập", "đồ tập"],
+    "uniform": ["đồng phục"]
+  },
+  "occasions": {
+    "office": ["đi làm", "công sở", "văn phòng"],
+    "casual": ["hằng ngày", "hàng ngày", "đi chơi", "mặc thường ngày"],
+    "formal": ["đi tiệc", "dự tiệc", "trang trọng", "đám cưới"],
+    "sport": ["tập gym", "chạy bộ", "tập luyện", "chơi thể thao"],
+    "outdoor": ["ngoài trời", "đi phượt", "leo núi"]
+  },
+  "seasons": {
+    "spring": ["mùa xuân"],
+    "summer": ["mùa hè", "mùa hạ", "mùa nóng", "trời nóng"],
+    "autumn": ["mùa thu"],
+    "winter": ["mùa đông", "mùa lạnh", "trời lạnh"],
+    "rainy_season": ["mùa mưa"]
+  }
+}

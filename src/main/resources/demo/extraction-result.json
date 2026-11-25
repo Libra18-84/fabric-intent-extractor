@@ -1,0 +1,28 @@
+{
+  "intent": {
+    "advice_type": "find_fabric",
+    "fabric_types": [],
+    "garment_types": ["top"],
+    "occasions": ["office"]
+  },
+  "preferences": {
+    "fabric_types": [],
+    "characteristics": ["breathable"],
+    "price_level": null,
+    "target_price": null
+  },
+  "constraints": {
+    "seasons": ["summer"],
+    "required_fabric_types": [],
+    "excluded_fabric_types": [],
+    "required_characteristics": [],
+    "excluded_characteristics": [],
+    "budget": {
+      "currency": "VND",
+      "basis": "unspecified",
+      "lower": null,
+      "upper": {"amount": 200000, "inclusive": false}
+    }
+  },
+  "unmapped_terms": []
+}
