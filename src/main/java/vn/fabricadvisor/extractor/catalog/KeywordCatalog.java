@@ -12,6 +12,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.regex.Pattern;
 
@@ -106,6 +107,42 @@ public final class KeywordCatalog {
         return " " + normalize(alias) + " ";
     }
 
+    public Optional<String> findStandaloneFabric(String query) {
+        String normalizedQuery = normalize(query);
+
+        // Chỉ áp dụng khi toàn bộ câu khớp tên của duy nhất một loại vải.
+        var matchingIds = entries.get("fabric_types").entrySet().stream()
+                .filter(entry -> entry.getValue().stream()
+                        .anyMatch(alias -> normalize(alias).equals(normalizedQuery)))
+                .map(Map.Entry::getKey)
+                .limit(2)
+                .toList();
+
+        return matchingIds.size() == 1 ? Optional.of(matchingIds.getFirst()) : Optional.empty();
+    }
+    public static boolean isExactAlias(String term, List<String> aliases) {
+        String normalizedTerm = normalize(term);
+        return !normalizedTerm.isEmpty()
+                && aliases.stream().anyMatch(alias -> normalize(alias).equals(normalizedTerm));
+    }
+
+    public static boolean occursInRequest(String query, String term) {
+        String phrase = normalizeLiteral(term);
+        if (phrase.isEmpty()) {
+            return false;
+        }
+
+        // Đối chiếu trọn cụm và giữ nguyên các ký hiệu như dấu + trong UPF 50+.
+        String wordCharacter = "[\\p{L}\\p{M}\\p{N}]";
+        return Pattern.compile("(?<!" + wordCharacter + ")" + Pattern.quote(phrase)
+                        + "(?!" + wordCharacter + ")")
+                .matcher(normalizeLiteral(query)).find();
+    }
+
+    private static String normalizeLiteral(String text) {
+        return Normalizer.normalize(text.toLowerCase(Locale.ROOT), Normalizer.Form.NFC)
+                .replaceAll("(?U)\\s+", " ").strip();
+    }
     private static String normalize(String text) {
         String unicodeText = Normalizer.normalize(text.toLowerCase(Locale.ROOT), Normalizer.Form.NFC);
         return TOKEN_SEPARATOR.matcher(unicodeText).replaceAll(" ").strip();

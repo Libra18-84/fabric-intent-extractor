@@ -14,6 +14,7 @@ import java.time.Duration;
 
 public final class LlamaCppLanguageModel implements LanguageModel {
     public static final String DEFAULT_BASE_URL = "http://127.0.0.1:8080";
+    private static final int MAX_OUTPUT_TOKENS = 768;
 
     private final HttpClient httpClient;
     private final ObjectMapper mapper;
@@ -39,6 +40,9 @@ public final class LlamaCppLanguageModel implements LanguageModel {
             requestBody.put("model", model);
         }
         requestBody.put("stream", false);
+        requestBody.put("stream", false);
+        requestBody.put("max_tokens", MAX_OUTPUT_TOKENS);
+        requestBody.put("temperature", 0.0);
         requestBody.put("temperature", 0.0);
         requestBody.putObject("response_format")
                 .put("type", "json_schema")

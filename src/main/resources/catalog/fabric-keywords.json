@@ -1,6 +1,6 @@
 {
   "fabric_types": {
-    "cotton": ["cotton", "vải bông"],
+    "cotton": ["cotton", "coton", "vải bông"],
     "linen": ["linen", "vải lanh", "đũi lanh"],
     "silk": ["lụa", "tơ tằm", "silk"],
     "wool": ["len", "wool"],
